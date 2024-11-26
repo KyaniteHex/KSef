@@ -8,9 +8,13 @@ const App = () => {
 
   const handleSchemaSelect = async (schemaName) => {
     if (schemaName) {
-      const structure = await fetchSchemaJson(schemaName);
-      console.log('Otrzymana struktura JSON:', structure);
-      setFormStructure(structure);
+      try {
+        const structure = await fetchSchemaJson(schemaName);
+        console.log('Otrzymana struktura JSON:', structure);
+        setFormStructure(structure);
+      } catch (error) {
+        console.error('Błąd podczas pobierania danych:', error);
+      }
     } else {
       setFormStructure(null);
     }
