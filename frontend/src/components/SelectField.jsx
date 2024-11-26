@@ -1,8 +1,8 @@
-const SelectField = ({ name, options }) => {
+const SelectField = ({ name, options = [], required }) => {
   return (
     <div>
-      <label htmlFor={name}>{name}</label>
-      <select id={name} name={name}>
+      <select id={name} name={name} required={required}>
+        <option value="">-- Wybierz --</option>
         {options.map((option) => (
           <option key={option} value={option}>
             {option}

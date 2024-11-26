@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-export const parseXsd = async (xsdContent) => {
-    const response = await axios.post('/api/xsd/parse', { xsdContent });
-
-    return response.data;
+export const fetchSchemaJson = async (schemaName) => {
+  const response = await axios.post('http://localhost:5000/api/xsd/parse-xsd', { schemaName });
+  return response.data;
 };

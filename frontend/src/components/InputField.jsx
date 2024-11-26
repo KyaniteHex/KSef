@@ -1,9 +1,15 @@
-const InputField = ({ name, type }) => {
+const InputField = ({ name, type, required }) => {
   return (
     <div>
-      <label htmlFor={name}>{name}</label>
-      <input id={name} name={name} type={type} />
+      <input
+        id={name}
+        name={name}
+        type={type}
+        required={required}
+        placeholder={name}
+      />
     </div>
   );
 };
+
 export default InputField;

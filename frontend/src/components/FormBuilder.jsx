@@ -1,25 +1,36 @@
+import React from 'react';
+import InputField from './InputField';
+import SelectField from './SelectField';
+
 const FormBuilder = ({ structure }) => {
-  const { elements = [], dictionaries = {} } = structure;
+  if (!structure || !structure.elements) {
+    return <div>Brak danych do wyświetlenia.</div>;
+  }
 
-  const renderFields = () =>
-    elements.map((el) => {
-      const { name, type } = el;
-      const cleanType = type.split(":")[1] || type;
+  const renderElement = (element) => {
+    const { name, type, required, values, children, documentation } = element;
 
-      if (dictionaries[cleanType]) {
-        return (
-          <SelectField
-            key={name}
-            name={name}
-            options={dictionaries[cleanType]}
-          />
-        );
-      }
+    return (
+      <div key={name}>
+        <label>
+          {name} {required && <span>*</span>}
+          {documentation && <span title={documentation}> ℹ </span>}
+        </label>
+        {values ? (
+          <SelectField name={name} options={values} required={required} />
+        ) : (
+          <InputField name={name} type={type} required={required} />
+        )}
+        {children && (
+          <div style={{ marginLeft: '20px' }}>
+            {children.map((child) => renderElement(child))}
+          </div>
+        )}
+      </div>
+    );
+  };
 
-      return <InputField key={name} name={name} type="text" />;
-    });
-
-  return <form>{renderFields()}</form>;
+  return <form>{structure.elements.map((el) => renderElement(el))}</form>;
 };
 
 export default FormBuilder;
