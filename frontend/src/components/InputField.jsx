@@ -1,4 +1,27 @@
-const InputField = ({ name, type, required }) => {
+const InputField = ({ name, type, required, pattern, minLength, maxLength, minInclusive, maxInclusive }) => {
+  const validateValue = (e) => {
+    const value = e.target.value;
+
+    if (minLength && value.length < minLength) {
+      alert(`Wartość dla ${name} musi mieć co najmniej ${minLength} znaków.`);
+    }
+    if (maxLength && value.length > maxLength) {
+      alert(`Wartość dla ${name} nie może przekraczać ${maxLength} znaków.`);
+    }
+    if (pattern && !new RegExp(pattern).test(value)) {
+      alert(`Wartość dla ${name} nie pasuje do wzorca.`);
+    }
+    if (type === 'number') {
+      const numValue = parseFloat(value);
+      if (minInclusive && numValue < minInclusive) {
+        alert(`Wartość dla ${name} musi być co najmniej ${minInclusive}.`);
+      }
+      if (maxInclusive && numValue > maxInclusive) {
+        alert(`Wartość dla ${name} nie może być większa niż ${maxInclusive}.`);
+      }
+    }
+  };
+
   return (
     <div>
       <input
@@ -6,6 +29,7 @@ const InputField = ({ name, type, required }) => {
         name={name}
         type={type}
         required={required}
+        onBlur={validateValue} // Walidacja przy opuszczeniu pola
         placeholder={name}
       />
     </div>
