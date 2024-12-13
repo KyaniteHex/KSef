@@ -3,7 +3,6 @@ import path from 'path';
 import { processXsdToJson, getSchemas } from '../services/xsdService.js';
 import { fileURLToPath } from 'url';
 
-// Ustawienie __dirname dla modułów ES
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

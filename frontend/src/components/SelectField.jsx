@@ -3,9 +3,9 @@ const SelectField = ({ name, options = [], required }) => {
     <div>
       <select id={name} name={name} required={required}>
         <option value="">-- Wybierz --</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
+        {options.map(({ value, documentation }) => (
+          <option key={value} value={value}>
+            {value} - {documentation}
           </option>
         ))}
       </select>

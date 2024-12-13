@@ -11,6 +11,19 @@ const App = () => {
       try {
         const structure = await fetchSchemaJson(schemaName);
         console.log('Otrzymana struktura JSON:', structure);
+
+
+        structure.forEach(child => {
+          const pMarzyObject = child.children?.find(faChild => faChild.name === "Fa")
+              ?.children?.find(adnotacjeChild => adnotacjeChild.name === "Adnotacje")
+              ?.children?.find(pMarzyChild => pMarzyChild.name === "PMarzy");
+          
+          if (pMarzyObject) {
+              console.log(pMarzyObject);
+          }
+      });
+      
+
         setFormStructure(structure);
       } catch (error) {
         console.error('Błąd podczas pobierania danych:', error);

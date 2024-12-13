@@ -1,4 +1,4 @@
-const InputField = ({ name, type, required, pattern, minLength, maxLength, minInclusive, maxInclusive }) => {
+const InputField = ({ name, type, required }) => {
   const validateValue = (e) => {
     const value = e.target.value;
 
@@ -29,7 +29,6 @@ const InputField = ({ name, type, required, pattern, minLength, maxLength, minIn
         name={name}
         type={type}
         required={required}
-        onBlur={validateValue} // Walidacja przy opuszczeniu pola
         placeholder={name}
       />
     </div>
